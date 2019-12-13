@@ -10,20 +10,9 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //final wordPair = WordPair.random();
     return MaterialApp(
       title: 'Startup Name Generator',
       home: RandomWords(),
-
-//      title: 'Welcome to Flutter',
-//      home: Scaffold(
-//        appBar: AppBar(
-//          title: Text('Welcome to Flutter'),
-//        ),
-//        body: Center(
-//          child: RandomWords(),
-//        ),
-//      ),
     );
   }
 }
@@ -48,7 +37,6 @@ class RandomWordsState extends State<RandomWords> {
       body: _buildSuggestions(),
     );
   }
-
 
   Widget _buildSuggestions() {
     return ListView.builder(
