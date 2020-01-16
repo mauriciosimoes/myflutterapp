@@ -3,40 +3,51 @@ import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  // Testing conflit on Version control.
+class MyApp extends StatelessWidget { // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
+      title: 'Task Comunidade Lellas',
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: Colors.brown,
       ),
-      home: RandomWords(),
+      home: MyCLStatefull(),
     );
   }
 }
 
-class RandomWords extends StatefulWidget {
+class MyCLStatefull extends StatefulWidget {
   @override
-  RandomWordsState createState() => RandomWordsState();
+  MyCLState createState() => MyCLState();
 }
 
-class RandomWordsState extends State<RandomWords> {
+class MyCLState extends State<MyCLStatefull> {
   final _suggestions = <WordPair>[];
+  final _suggestionsRow = <Text>[];
+
   final Set<WordPair> _saved = Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override
   Widget build(BuildContext context) {
-    //final wordPair = WordPair.random();
-    //return Text(wordPair.asPascalCase);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Startup2 Name Generator'),
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          tooltip: 'Menu',
+          onPressed: null, // TODO Implementar menu, Login, profile etc
+        ),
+        title: Text('Comunidade Lellas'),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
+          IconButton(
+              icon: Icon(Icons.arrow_back),
+              tooltip: 'Nível anterior',
+              onPressed:null, // TODO Implementar navegação para traz. Pode ser implementada através do touch na tela par a direita.
+          ),
+          IconButton(
+              icon: Icon(Icons.arrow_forward),
+              tooltip: 'Nivel posterior',
+              onPressed: _pushSaved), // TODO Implementar navegação para frente. Pode ser implementada através do touch na tela par a esquerda.
         ],
       ),
       body: _buildSuggestions(),
@@ -78,10 +89,10 @@ class RandomWordsState extends State<RandomWords> {
   Widget _buildSuggestions() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemBuilder: /*1*/ (context, i) {
-          if (i.isOdd) return Divider(); /*2*/
+        itemBuilder: (context, i) {
+          if (i.isOdd) return Divider();
 
-          final index = i ~/ 2; /*3*/
+          final index = i ~/ 2;
           if (index >= _suggestions.length) {
             _suggestions.addAll(generateWordPairs().take(10)); /*4*/
           }
